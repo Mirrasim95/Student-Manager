@@ -22,9 +22,9 @@ void addUser() {
     scanf("%s", s.name);
 
     while (!isValidName(s.name)) {
-    printf("Name cannot contain numbers! Try again: ");
-    scanf("%s", s.name);
-}
+        printf("Name cannot contain numbers! Try again: ");
+        scanf("%s", s.name);
+    }
 
     printf("enter age: ");
     scanf("%d", &s.age);
@@ -41,6 +41,27 @@ void addUser() {
 
     printf("user added\n");
 
+}
+
+void showUsers() {
+    FILE *file = fopen("students.txt", "r");
+
+    if(file == NULL){
+        printf("users not found\n");
+        return;
+    }
+    struct Student s;
+    int index = 1;
+
+    while (fscanf(file, "%s %d", s.name, &s.age) != EOF) {
+        printf(">>>>>>>>>>>> ALL USERS >>>>>>>>>>>>>\n");
+        printf("%d. Name: %s, Age: %d\n", index, s.name, s.age);
+        printf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        index++;
+    }
+
+    fclose(file);
+    
 }
 
 int main( ) {
@@ -69,7 +90,7 @@ int main( ) {
                 printf("delete user\n");
                 break;
             case 3:
-                printf("show user\n");
+                showUsers();
                 break;
             case 4:
                 printf("uptdate user\n");
