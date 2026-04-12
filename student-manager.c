@@ -1,15 +1,30 @@
 #include <stdio.h>
+#include <ctype.h>
 
 struct Student {
     char name[30];
     int age;
 };
 
+int isValidName(char name[]) {
+    for (int i = 0; name[i] != '\0'; i++) {
+        if (isdigit(name[i])) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 void addUser() {
     struct Student s;
 
     printf("enter name: ");
     scanf("%s", s.name);
+
+    while (!isValidName(s.name)) {
+    printf("Name cannot contain numbers! Try again: ");
+    scanf("%s", s.name);
+}
 
     printf("enter age: ");
     scanf("%d", &s.age);
