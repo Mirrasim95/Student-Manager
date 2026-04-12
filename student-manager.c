@@ -32,11 +32,11 @@ int main( ) {
     int number;
 
     while(1) {
-        printf("add user\n");
-        printf("delete user\n");
-        printf("show user\n");
-        printf("uptdate user\n");
-        printf("exit\n");
+        printf("\n1 - add user\n");
+        printf("2 - delete user\n");
+        printf("3 - show user\n");
+        printf("4 - uptdate user\n");
+        printf("5 - exit\n\n");
         
 
         printf("write option: ");
@@ -48,7 +48,7 @@ int main( ) {
 
         switch (number) {
             case 1:
-                printf("add user\n");
+                addUser();
                 break;
             case 2:
                 printf("delete user\n");
