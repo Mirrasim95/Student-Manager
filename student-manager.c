@@ -1,7 +1,12 @@
 #include <stdio.h>
 
+struct Student {
+    char name[30];
+    int age;
+};
+
 int main( ) {
-    int pick;
+    int number;
 
     while(1) {
         printf("add user\n");
@@ -12,27 +17,28 @@ int main( ) {
         
 
         printf("write option: ");
-        scanf("%d", &pick);
+        scanf("%d", &number);
 
-        if(pick ==5){
+        if(number ==5){
             break;
         }
 
-        switch (choice) {
+        switch (number) {
             case 1:
-                printf("Add user selected\n");
+                printf("add user\n");
                 break;
             case 2:
-                printf("Delete user selected\n");
+                printf("delete user\n");
                 break;
             case 3:
-                printf("Show users selected\n");
+                printf("show user\n");
                 break;
             case 4:
-                printf("Update user selected\n");
+                printf("uptdate user\n");
                 break;
             default:
-                printf("Invalid choice\n");
+                printf("\n");
         }
     }
+    return 0;
 }
