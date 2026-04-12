@@ -5,6 +5,29 @@ struct Student {
     int age;
 };
 
+void addUser() {
+    struct Student s;
+
+    printf("enter name: ");
+    scanf("%s", s.name);
+
+    printf("enter age: ");
+    scanf("%d", &s.age);
+
+    FILE *file = fopen("students.txt", "a");
+
+    if (file == NULL) {
+        printf("file is not exist\n");
+        return;
+    }
+
+    fprintf(file, "%s %d\n", s.name, s.age);
+    fclose(file);
+
+    printf("user added\n");
+
+}
+
 int main( ) {
     int number;
 
