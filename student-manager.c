@@ -15,6 +15,61 @@ int isValidName(char name[]) {
     return 1;
 }
 
+int isValidAge(int age) {
+    return age > 0 && age < 120;
+}
+
+
+void deleteUser() {
+    FILE *file = fopen("students.txt", "r");
+
+    if (file == NULL) {
+        printf("No users to delete.\n");
+        return;
+    }
+
+    struct Student students[100];
+    int count = 0;
+
+    //burda oxunur 
+    while (fscanf(file, "%s %d", students[count].name, &students[count].age) != EOF) {
+        count++;
+    }
+
+    fclose(file);
+
+    // qosteririk
+    for (int i = 0; i < count; i++) {
+        printf("%d. %s %d\n", i + 1, students[i].name, students[i].age);
+    }
+
+    int index;
+    printf("Select user to delete: ");
+    scanf("%d", &index);
+
+    if (index < 1 || index > count) {
+        printf("Invalid choice!\n");
+        return;
+    }
+
+    for (int i = index - 1; i < count - 1; i++) {
+        students[i] = students[i + 1];
+    }
+
+    count--;
+
+    // telebeni silirik
+    file = fopen("students.txt", "w");
+
+    for (int i = 0; i < count; i++) {
+        fprintf(file, "%s %d\n", students[i].name, students[i].age);
+    }
+
+    fclose(file);
+
+    printf("User deleted!\n");
+}
+
 void addUser() {
     struct Student s;
 
@@ -28,6 +83,11 @@ void addUser() {
 
     printf("enter age: ");
     scanf("%d", &s.age);
+
+    while (!isValidAge(s.age)) {
+        printf("Invalid age! Try again: ");
+        scanf("%d", &s.age);
+    }
 
     FILE *file = fopen("students.txt", "a");
 
@@ -88,7 +148,7 @@ int main( ) {
                 addUser();
                 break;
             case 2:
-                printf("delete user\n");
+                deleteUser();
                 break;
             case 3:
                 showUsers();
