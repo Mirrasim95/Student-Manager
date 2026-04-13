@@ -53,12 +53,13 @@ void showUsers() {
     struct Student s;
     int index = 1;
 
+
+    printf("------------ ALL USERS -------------\n");
     while (fscanf(file, "%s %d", s.name, &s.age) != EOF) {
-        printf(">>>>>>>>>>>> ALL USERS >>>>>>>>>>>>>\n");
         printf("%d. Name: %s, Age: %d\n", index, s.name, s.age);
-        printf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         index++;
     }
+    printf("------------------------------------");
 
     fclose(file);
     
