@@ -20,6 +20,71 @@ int isValidAge(int age) {
 }
 
 
+
+void updateUser() {
+    FILE *file = fopen("students.txt", "r");
+
+    if (file == NULL) {
+        printf("No users found.\n");
+        return;
+    }
+
+    struct Student students[100];
+    int count = 0;
+
+    // oxuyuruq
+    while (fscanf(file, "%s %d", students[count].name, &students[count].age) != EOF) {
+        count++;
+    }
+
+    fclose(file);
+
+    // qosteririk
+    for (int i = 0; i < count; i++) {
+        printf("%d. %s %d\n", i + 1, students[i].name, students[i].age);
+    }
+
+    int index;
+    printf("Select user to update: ");
+    scanf("%d", &index);
+
+    if (index < 1 || index > count) {
+        printf("Invalid choice!\n");
+        return;
+    }
+
+    // hamisin cixaririq
+    printf("Enter new name: ");
+    scanf("%s", students[index - 1].name);
+
+    while (!isValidName(students[index - 1].name)) {
+        printf("Invalid name! Try again: ");
+        scanf("%s", students[index - 1].name);
+    }
+
+    printf("Enter new age: ");
+
+    while (1) {
+        if (scanf("%d", &students[index - 1].age) == 1 && isValidAge(students[index - 1].age)) {
+            break;
+        } else {
+            printf("Invalid age! Try again: ");
+            while (getchar() != '\n');
+        }
+    }
+
+    // fayli deyiwirik
+    file = fopen("students.txt", "w");
+
+    for (int i = 0; i < count; i++) {
+        fprintf(file, "%s %d\n", students[i].name, students[i].age);
+    }
+
+    fclose(file);
+
+    printf("User updated!\n");
+}
+
 void deleteUser() {
     FILE *file = fopen("students.txt", "r");
 
@@ -69,6 +134,7 @@ void deleteUser() {
 
     printf("User deleted!\n");
 }
+
 
 void addUser() {
     struct Student s;
@@ -154,7 +220,7 @@ int main( ) {
                 showUsers();
                 break;
             case 4:
-                printf("uptdate user\n");
+                updateUser();
                 break;
             default:
                 printf("\n");
